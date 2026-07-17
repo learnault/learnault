@@ -1,9 +1,16 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { CheckCircle, XCircle, ArrowRight, RotateCcw, Award } from "lucide-react";
-import { RewardCelebrationModal } from "@/components/reward/RewardCelebrationModal";
+import {
+  ArrowRight,
+  Award,
+  CheckCircle,
+  RotateCcw,
+  XCircle,
+} from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+
+import { RewardCelebrationModal } from '@/components/reward/RewardCelebrationModal';
+import { useState } from 'react';
 
 interface QuizQuestion {
   question: string;
@@ -13,47 +20,47 @@ interface QuizQuestion {
 
 const MOCK_QUESTIONS: QuizQuestion[] = [
   {
-    question: "What is the Stellar network primarily used for?",
+    question: 'What is the Stellar network primarily used for?',
     options: [
-      "Digital art NFTs",
-      "Cross-border payments and asset tokenization",
-      "Social media platform",
-      "Cloud computing services",
+      'Digital art NFTs',
+      'Cross-border payments and asset tokenization',
+      'Social media platform',
+      'Cloud computing services',
     ],
     correctIndex: 1,
   },
   {
-    question: "What is the native cryptocurrency of the Stellar network?",
-    options: ["BTC", "ETH", "XLM", "SOL"],
+    question: 'What is the native cryptocurrency of the Stellar network?',
+    options: ['BTC', 'ETH', 'XLM', 'SOL'],
     correctIndex: 2,
   },
   {
-    question: "What consensus mechanism does Stellar use?",
+    question: 'What consensus mechanism does Stellar use?',
     options: [
-      "Proof of Work",
-      "Proof of Stake",
-      "Stellar Consensus Protocol (SCP)",
-      "Delegated Proof of Stake",
+      'Proof of Work',
+      'Proof of Stake',
+      'Stellar Consensus Protocol (SCP)',
+      'Delegated Proof of Stake',
     ],
     correctIndex: 2,
   },
   {
     question: "What is a key advantage of Stellar's blockchain?",
     options: [
-      "Unlimited smart contract complexity",
-      "High transaction fees",
-      "Low-cost, fast transactions with built-in exchange",
-      "Anonymous transactions only",
+      'Unlimited smart contract complexity',
+      'High transaction fees',
+      'Low-cost, fast transactions with built-in exchange',
+      'Anonymous transactions only',
     ],
     correctIndex: 2,
   },
   {
-    question: "What is a Soroban smart contract?",
+    question: 'What is a Soroban smart contract?',
     options: [
-      "A Stellar wallet type",
-      "A Rust-based smart contract platform on Stellar",
-      "A type of Stellar token",
-      "A Stellar consensus node",
+      'A Stellar wallet type',
+      'A Rust-based smart contract platform on Stellar',
+      'A type of Stellar token',
+      'A Stellar consensus node',
     ],
     correctIndex: 1,
   },
@@ -110,11 +117,11 @@ function QuizResults({
         />
       )}
       <div className="mb-8 text-center">
-          <div className="mb-4 flex justify-center">
-            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
-              <Award className="h-10 w-10 text-primary" aria-hidden="true" />
-            </div>
+        <div className="mb-4 flex justify-center">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
+            <Award className="h-10 w-10 text-primary" aria-hidden="true" />
           </div>
+        </div>
         <h1 className="mb-2 text-2xl font-bold font-heading text-foreground">
           Quiz Complete!
         </h1>
@@ -136,12 +143,12 @@ function QuizResults({
         </div>
         <p className="mt-4 text-sm text-muted-foreground">
           {percentage === 100
-            ? "Perfect score!"
+            ? 'Perfect score!'
             : percentage >= 80
-              ? "Great job!"
+              ? 'Great job!'
               : percentage >= 60
-                ? "Good effort!"
-                : "Keep practicing!"}
+                ? 'Good effort!'
+                : 'Keep practicing!'}
         </p>
       </div>
 
@@ -156,15 +163,21 @@ function QuizResults({
               key={i}
               className={`rounded-lg border p-4 ${
                 wasCorrect
-                  ? "border-green-200 bg-green-50"
-                  : "border-red-200 bg-red-50"
+                  ? 'border-green-200 bg-green-50'
+                  : 'border-red-200 bg-red-50'
               }`}
             >
               <div className="flex items-start gap-3">
                 {wasCorrect ? (
-                  <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-green-700" aria-hidden="true" />
+                  <CheckCircle
+                    className="mt-0.5 h-5 w-5 shrink-0 text-green-700"
+                    aria-hidden="true"
+                  />
                 ) : (
-                  <XCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-600" aria-hidden="true" />
+                  <XCircle
+                    className="mt-0.5 h-5 w-5 shrink-0 text-red-600"
+                    aria-hidden="true"
+                  />
                 )}
                 <div>
                   <p className="text-sm font-medium text-foreground">
@@ -172,9 +185,11 @@ function QuizResults({
                   </p>
                   {!wasCorrect && (
                     <p className="mt-1 text-xs text-muted-foreground">
-                      Your answer:{" "}
-                      <span className="text-red-600">{q.options[answers[i]]}</span>
-                      {" — "}Correct:{" "}
+                      Your answer:{' '}
+                      <span className="text-red-600">
+                        {q.options[answers[i]]}
+                      </span>
+                      {' — '}Correct:{' '}
                       <span className="text-green-700">
                         {q.options[q.correctIndex]}
                       </span>
@@ -254,14 +269,7 @@ export function QuizContainer() {
     <div className="mx-auto max-w-2xl px-4 py-12">
       <QuizProgress current={currentIndex + 1} total={totalQuestions} />
 
-      <motion.div
-        key={currentIndex}
-        initial={shouldReduceMotion ? false : { opacity: 0, x: 24 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={shouldReduceMotion ? undefined : { opacity: 0, x: -24 }}
-        transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeOut" }}
-        className="mb-6 rounded-xl border bg-card p-6 shadow-sm"
-      >
+      <div className="mb-6 rounded-xl border bg-card p-6 shadow-sm">
         <h2 className="mb-6 text-xl font-bold text-foreground font-heading">
           {question.question}
         </h2>
@@ -272,18 +280,19 @@ export function QuizContainer() {
             const isCorrectOption = idx === question.correctIndex;
 
             let containerClass =
-              "border-border bg-card hover:border-primary/50 hover:bg-accent cursor-pointer";
-            let letterClass = "border-border text-muted-foreground";
+              'border-border bg-card hover:border-primary/50 hover:bg-accent cursor-pointer';
+            let letterClass = 'border-border text-muted-foreground';
 
             if (showFeedback) {
               if (isCorrectOption) {
-                containerClass = "border-green-500 bg-green-50 cursor-default";
-                letterClass = "border-green-500 bg-green-500 text-white";
+                containerClass = 'border-green-500 bg-green-50 cursor-default';
+                letterClass = 'border-green-500 bg-green-500 text-white';
               } else if (isSelected) {
-                containerClass = "border-red-500 bg-red-50 cursor-default";
-                letterClass = "border-red-500 bg-red-500 text-white";
+                containerClass = 'border-red-500 bg-red-50 cursor-default';
+                letterClass = 'border-red-500 bg-red-500 text-white';
               } else {
-                containerClass = "border-border bg-card opacity-50 cursor-default";
+                containerClass =
+                  'border-border bg-card opacity-50 cursor-default';
               }
             }
 
@@ -301,16 +310,22 @@ export function QuizContainer() {
                 </span>
                 <span className="flex-1 text-foreground">{option}</span>
                 {showFeedback && isCorrectOption && (
-                  <CheckCircle className="h-5 w-5 shrink-0 text-green-700" aria-hidden="true" />
+                  <CheckCircle
+                    className="h-5 w-5 shrink-0 text-green-700"
+                    aria-hidden="true"
+                  />
                 )}
                 {showFeedback && isSelected && !isCorrectOption && (
-                  <XCircle className="h-5 w-5 shrink-0 text-red-600" aria-hidden="true" />
+                  <XCircle
+                    className="h-5 w-5 shrink-0 text-red-600"
+                    aria-hidden="true"
+                  />
                 )}
               </button>
             );
           })}
         </div>
-      </motion.div>
+      </div>
 
       {showFeedback && (
         <motion.div
@@ -321,8 +336,8 @@ export function QuizContainer() {
           <div
             className={`mb-4 rounded-lg border p-4 ${
               isCorrect
-                ? "border-green-500 bg-green-50 text-green-800"
-                : "border-red-500 bg-red-50 text-red-800"
+                ? 'border-green-500 bg-green-50 text-green-800'
+                : 'border-red-500 bg-red-50 text-red-800'
             }`}
           >
             <div className="flex items-center gap-2 font-semibold">
@@ -331,11 +346,11 @@ export function QuizContainer() {
               ) : (
                 <XCircle className="h-5 w-5" aria-hidden="true" />
               )}
-              {isCorrect ? "Correct!" : "Incorrect"}
+              {isCorrect ? 'Correct!' : 'Incorrect'}
             </div>
             {!isCorrect && (
               <p className="mt-1 text-sm">
-                The correct answer is:{" "}
+                The correct answer is:{' '}
                 <strong>{question.options[question.correctIndex]}</strong>
               </p>
             )}
@@ -347,10 +362,11 @@ export function QuizContainer() {
           >
             {currentIndex < totalQuestions - 1 ? (
               <>
-                Next Question <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                Next Question{' '}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </>
             ) : (
-              "View Results"
+              'View Results'
             )}
           </button>
         </motion.div>
