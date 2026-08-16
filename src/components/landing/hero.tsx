@@ -1,3 +1,7 @@
+import Image from "next/image";
+import { Syne } from "next/font/google";
+import GlobalNav from "@/components/landing/global-nav";
+import { heroBg, heroPeople, people } from "../../../public/assets";
 import { heroBg, heroPeople, people } from '../../../public/assets';
 
 import { Button } from '@/components/ui/Button';
@@ -12,6 +16,8 @@ const syne = Syne({
 const Hero = () => {
   return (
     <section
+      id="top"
+      className="relative flex min-h-screen flex-col overflow-hidden bg-[#f7f7f700]"
       className="relative flex items-center min-h-screen overflow-hidden bg-secondary-background"
       style={{
         backgroundImage: `url(${heroBg.src}), url("/assets/hero-bg.svg")`,
@@ -20,7 +26,8 @@ const Hero = () => {
         backgroundPosition: 'center, bottom center',
       }}
     >
-      <div className="relative mx-auto grid w-full max-w-[1180px] items-center gap-8 px-4 py-8 sm:px-6 sm:py-10 lg:grid-cols-[minmax(0,520px)_minmax(0,524px)] lg:justify-center lg:gap-12 lg:px-10 lg:py-12">
+      <GlobalNav />
+      <div className="relative mx-auto grid w-full max-w-[1180px] flex-1 items-center gap-8 px-4 py-8 sm:px-6 sm:py-10 lg:grid-cols-[minmax(0,520px)_minmax(0,524px)] lg:justify-center lg:gap-12 lg:px-10 lg:py-12">
         <div className="order-2 max-w-xl space-y-5 lg:order-1 lg:justify-self-center lg:space-y-7">
           <h1
             className={`${syne.className} max-w-[450px] text-2xl leading-[1.02] font-bold text-text-primary sm:text-6xl`}
