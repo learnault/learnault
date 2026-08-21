@@ -131,7 +131,7 @@ const LearningPaths = () => {
       <div className="mx-auto max-w-[1180px]">
         <header className="max-w-2xl">
           <TierBadge label="Stellar Learning Path" />
-          <h2 className="font-heading mt-5 text-[28px] leading-[1.12] font-bold text-text-primary sm:text-[42px] lg:text-[48px]">
+          <h2 className="mt-5 text-[28px] font-bold leading-[1.12] text-text-primary sm:text-[42px] lg:text-[48px]">
             Master Stellar. Earn as you progress.
           </h2>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-text-secondary sm:text-lg">
@@ -155,83 +155,86 @@ const LearningPaths = () => {
             ref={scrollRef}
             className="flex snap-x snap-mandatory gap-0 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] lg:overflow-visible [&::-webkit-scrollbar]:hidden"
           >
-            {tiers.map((tier, index) => (
-              <article
-                key={tier.tier}
-                className={`flex min-w-[min(100%,300px)] shrink-0 snap-start flex-col px-5 py-2 sm:min-w-[320px] sm:px-6 lg:min-w-0 lg:flex-1 lg:px-8 ${
-                  index > 0
-                    ? "border-border max-lg:mt-8 max-lg:border-t max-lg:pt-8 lg:mt-0 lg:border-l lg:border-t-0 lg:pt-2"
-                    : ""
-                }`}
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <TierBadge label={tier.tier} />
-                  <p className="text-right text-sm font-bold text-text-primary sm:text-base">
-                    {tier.reward}
-                  </p>
-                </div>
+            {tiers.map((tier, index) => {
+              const cardClasses =
+                index > 0
+                  ? "border-border max-lg:mt-8 max-lg:border-t max-lg:pt-8 lg:mt-0 lg:border-l lg:border-t-0 lg:pt-2"
+                  : "";
+              const buttonClasses =
+                tier.status === "available"
+                  ? "bg-primary text-text-primary hover:bg-primary/90"
+                  : "cursor-not-allowed bg-border text-text-secondary";
 
-                <h3 className="mt-5 text-xl font-bold text-text-primary sm:text-2xl">
-                  {tier.title}
-                </h3>
-
-                <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-text-muted">
-                  <span className="inline-flex items-center gap-1.5">
-                    <PathIcon name="clock" className="h-5 w-5 shrink-0" />
-                    {tier.duration}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <PathIcon name="sprout" className="h-4 w-4 shrink-0" />
-                    {tier.level}
-                  </span>
-                </div>
-
-                <p className="mt-4 text-sm leading-relaxed text-text-muted sm:text-base">
-                  {tier.description}
-                </p>
-
-                <div className="mt-5 rounded-xl bg-secondary-background px-4 py-3.5">
-                  <ul className="space-y-2.5 text-sm text-text-secondary">
-                    <li className="flex items-center gap-2">
-                      <PathIcon name="play" className="h-4 w-4 shrink-0" />
-                      {tier.videos} Video lessons
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <PathIcon name="article" className="h-4 w-4 shrink-0" />
-                      {tier.articles} Articles
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="mt-auto pt-6">
-                  {tier.unlockHint ? (
-                    <p className="mb-3 text-xs text-text-muted sm:text-sm">
-                      {tier.unlockHint}
+              return (
+                <article
+                  key={tier.tier}
+                  className={`flex min-w-[min(100%,300px)] shrink-0 snap-start flex-col px-5 py-2 sm:min-w-[320px] sm:px-6 lg:min-w-0 lg:flex-1 lg:px-8 ${cardClasses}`}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <TierBadge label={tier.tier} />
+                    <p className="text-right text-sm font-bold text-text-primary sm:text-base">
+                      {tier.reward}
                     </p>
-                  ) : null}
+                  </div>
 
-                  <button
-                    type="button"
-                    disabled={tier.status === "locked"}
-                    aria-disabled={tier.status === "locked"}
-                    className={`w-full rounded-full px-4 py-3 text-sm font-bold transition sm:py-3.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
-                      tier.status === "available"
-                        ? "bg-primary text-text-primary hover:bg-primary/90"
-                        : "cursor-not-allowed bg-border text-text-secondary"
-                    }`}
-                  >
-                    {tier.ctaLabel}
-                  </button>
-                </div>
-              </article>
-            ))}
+                  <h3 className="mt-5 text-xl font-bold text-text-primary sm:text-2xl">
+                    {tier.title}
+                  </h3>
+
+                  <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-text-muted">
+                    <span className="inline-flex items-center gap-1.5">
+                      <PathIcon name="clock" className="h-5 w-5 shrink-0" />
+                      {tier.duration}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <PathIcon name="sprout" className="h-4 w-4 shrink-0" />
+                      {tier.level}
+                    </span>
+                  </div>
+
+                  <p className="mt-4 text-sm leading-relaxed text-text-muted sm:text-base">
+                    {tier.description}
+                  </p>
+
+                  <div className="mt-5 rounded-xl bg-secondary-background px-4 py-3.5">
+                    <ul className="space-y-2.5 text-sm text-text-secondary">
+                      <li className="flex items-center gap-2">
+                        <PathIcon name="play" className="h-4 w-4 shrink-0" />
+                        {tier.videos} Video lessons
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <PathIcon name="article" className="h-4 w-4 shrink-0" />
+                        {tier.articles} Articles
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="mt-auto pt-6">
+                    {tier.unlockHint ? (
+                      <p className="mb-3 text-xs text-text-muted sm:text-sm">
+                        {tier.unlockHint}
+                      </p>
+                    ) : null}
+
+                    <button
+                      type="button"
+                      disabled={tier.status === "locked"}
+                      aria-disabled={tier.status === "locked"}
+                      className={`w-full rounded-full px-4 py-3 text-sm font-bold transition sm:py-3.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${buttonClasses}`}
+                    >
+                      {tier.ctaLabel}
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
           </div>
 
           <button
             type="button"
             onClick={scrollNext}
             aria-label="View next learning tier"
-            className="absolute top-1/2 right-0 z-10 hidden h-11 w-11 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full border border-border bg-surface text-text-primary shadow-[0_4px_14px_rgba(15,23,42,0.08)] transition hover:bg-secondary-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:flex"
+            className="absolute right-0 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full border border-border bg-surface text-text-primary shadow-[0_4px_14px_rgba(15,23,42,0.08)] transition hover:bg-secondary-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:flex"
           >
             <PathIcon name="chevronRight" className="h-5 w-5" />
           </button>
