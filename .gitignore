@@ -25,8 +25,6 @@ coverage/
 **/*.css.map
 
 # Environment
-.env
-.env.local
 .env.development.local
 .env.test.local
 .env.production.local
@@ -63,7 +61,6 @@ prisma/*.db-journal
 *.dump
 
 # Editors - VS Code
-.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -133,3 +130,4 @@ template
 
 # Local Figma exports (assets copied to public/assets)
 Export/
+config.bat
